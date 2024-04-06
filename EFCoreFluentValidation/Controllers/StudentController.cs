@@ -26,4 +26,17 @@ public class StudentController : ControllerBase
         _context.SaveChanges();
         return Ok ();
     }
+    [HttpPut("{id}")]
+    public IActionResult UpdateStudent(int id,UpdateStudentRequestDto model)
+    {
+        Student student = _context.Students.FirstOrDefault(x=>x.Id == id);
+
+        student.Email = model.Email;
+        student.Surname= model.Surname;
+        student.Phone= model.Phone;
+        student.BirthDate = model.BirthDate;
+        student.Name = model.Name;
+        return Ok (model);
+
+    }
 }
