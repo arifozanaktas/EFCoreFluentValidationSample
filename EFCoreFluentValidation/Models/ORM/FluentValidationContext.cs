@@ -9,4 +9,5 @@ public class FluentValidationContext : DbContext
         optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-DLOP8P5\SQLEXPRESS;Initial Catalog=EFCoreFluentValidation;Integrated Security=True;Trust Server Certificate=True");
     }
     public DbSet<Student> Students { get; set; }
+    public DbSet<University> Universities { get; set;}
 }

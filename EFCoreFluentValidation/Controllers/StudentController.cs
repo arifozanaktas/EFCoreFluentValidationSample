@@ -31,6 +31,11 @@ public class StudentController : ControllerBase
     {
         Student student = _context.Students.FirstOrDefault(x=>x.Id == id);
 
+        if (student == null)
+        {
+            return NotFound();
+        }
+
         student.Email = model.Email;
         student.Surname= model.Surname;
         student.Phone= model.Phone;
@@ -38,5 +43,19 @@ public class StudentController : ControllerBase
         student.Name = model.Name;
         return Ok (model);
 
+    }
+    [HttpGet]
+    public IActionResult GetAllStudents()
+    {
+        List<GetAllStudentsResponseDto> model = _context.Students.Select(x=> new GetAllStudentsResponseDto()
+        {
+            Id = x.Id,
+            Name = x.Name,
+            Phone = x.Phone,
+            Email = x.Email,
+            Surname = x.Surname,
+            UniversityName = x.University.Name,
+        }).ToList();
+        return Ok (model);
     }
 }
